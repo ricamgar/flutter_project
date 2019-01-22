@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/SecondScreen.dart';
+import 'package:flutter_project/homescreen/HomeScreen.dart';
+import 'package:flutter_project/SettingsScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -21,6 +22,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  HomeScreen _homeScreen = HomeScreen();
+  SettingsScreen _settingsScreen = SettingsScreen(1);
+
+  Widget _currentScreen;
+  int _currentScreenIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -31,6 +37,21 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  _getCurrentScreen() {
+    switch (_currentScreenIndex) {
+      case 0:
+        return _homeScreen;
+      case 1:
+        return _settingsScreen;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _currentScreen = _homeScreen;
   }
 
   @override
@@ -47,56 +68,55 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      drawer: Drawer(
+        child: ListView(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                RaisedButton(
-                  child: Text("Increment"),
-                  onPressed: _incrementCounter,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: RaisedButton(
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.hourglass_full),
-                        Text("Resetar"),
-                      ],
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _counter = 0;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(28.0),
-              child: Text(
-                "Has pulsado el botón $_counter veces",
-                style: Theme.of(context)
-                    .textTheme
-                    .title
-                    .copyWith(color: Colors.red),
-              ),
-            ),
-            RaisedButton(
-              child: Text("Abrir pantalla"),
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (c) {
-                  return SecondScreen();
-                }));
+            DrawerHeader(
+                child: Container(
+              color: Colors.blue,
+            )),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                setState(() {
+                  _currentScreen = _homeScreen;
+                });
+                Navigator.of(context).pop();
               },
-            )
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Setting'),
+              onTap: () {
+                setState(() {
+                  _currentScreen = _settingsScreen;
+                });
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home')
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              title: Text('Settings')
+          ),
+        ],
+        currentIndex: _currentScreenIndex,
+        onTap: (index) {
+          setState(() {
+            _currentScreenIndex = index;
+          });
+        },
+      ),
+      body: _getCurrentScreen(),
     );
   }
 }

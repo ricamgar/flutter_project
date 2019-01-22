@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "889336357940",
+    "firebase_url": "https://utad-c2e02.firebaseio.com",
+    "project_id": "utad-c2e02",
+    "storage_bucket": "utad-c2e02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889336357940:android:beaf9f271eccf770",
+        "android_client_info": {
+          "package_name": "com.ricamgar.flutterproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889336357940-0ck7c9aieproq62d4b53q32tbmblih4g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwrBDYZI_qBnnZfjVOZ8gVQTlhM9w7qvY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

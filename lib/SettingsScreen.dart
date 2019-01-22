@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class GridScreen extends StatefulWidget {
+class SettingsScreen extends StatefulWidget {
   final int position;
 
-  GridScreen(this.position);
+  SettingsScreen(this.position);
 
   @override
-  _GridScreenState createState() => _GridScreenState();
+  _SettingsScreenState createState() => _SettingsScreenState();
 }
 
-class _GridScreenState extends State<GridScreen> {
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class _GridScreenState extends State<GridScreen> {
         itemBuilder: (c, position) {
           return GestureDetector(
             onTap: () {
-              Navigator.pop(context, position);
+              Navigator.of(context).pop(position);
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
