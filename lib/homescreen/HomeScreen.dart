@@ -10,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> implements HomeView {
   HomePresenter _homePresenter;
-  List<String> _movies = [];
 
   _HomeScreenState() {
     _homePresenter = HomePresenter(this);
@@ -19,14 +18,6 @@ class _HomeScreenState extends State<HomeScreen> implements HomeView {
   @override
   void initState() {
     super.initState();
-    _homePresenter.init();
-  }
-
-  @override
-  showMovies(List<String> movies) {
-    setState(() {
-      this._movies = movies;
-    });
   }
 
   @override
@@ -43,14 +34,14 @@ class _HomeScreenState extends State<HomeScreen> implements HomeView {
         itemBuilder: (context, position) {
           return ListTile(
             leading: Icon(Icons.account_circle),
-            title: Text(_movies[position]),
+            title: Text("Title $position"),
             subtitle: Text("Subtitle $position"),
             onTap: () {
               _homePresenter.elementClicked(position);
             },
           );
         },
-        itemCount: _movies.length,
+        itemCount: 5,
         reverse: false,
       ),
     );
