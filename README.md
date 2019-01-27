@@ -7,5 +7,5 @@ Este es un proyecto de ejemplo para practicar los conceptos vistos en clase
 El proyecto tiene diferentes ramas con los diferentes estados:
 
 * __master__: El estado más reciente de la aplicación
-* __feature/http_networking__: Llamadas a una API pública usando la librería `http`
-* __feature/firebase_networking__: Obtención de datos de Firebase Database usando la librería `cloud_firestore`
+* __http_networking__: Llamadas a una API pública usando la librería `http`
+* __firebase_networking__: Obtención de datos de Firebase Database usando la librería `cloud_firestore`
