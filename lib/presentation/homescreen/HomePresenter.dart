@@ -1,8 +1,6 @@
-import 'dart:convert';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_project/model/user.dart';
 import 'package:flutter_project/presentation/homescreen/HomeView.dart';
-import 'package:http/http.dart' as network;
 
 class HomePresenter {
   HomeView _view;
@@ -11,14 +9,13 @@ class HomePresenter {
 
   fetchData() async {
     _view.showLoading();
-    network.Response response =
-        await network.get('https://randomuser.me/api/?results=10');
-    if (response.statusCode == 200) {
-      final jsonBody = json.decode(response.body);
-      List<User> users = jsonBody['results'].map<User>((element) {
-        String name = element['name']['first'];
-        String lastName = element['name']['last'];
-        String mail = element['email'];
+    QuerySnapshot snapshot =
+        await Firestore.instance.collection('users').getDocuments();
+    if (snapshot.documents.length > 0) {
+      List<User> users = snapshot.documents.map<User>((document) {
+        String name = document['name'];
+        String lastName = document['last_name'];
+        String mail = document['email'];
         return User(name, lastName, mail);
       }).toList();
       _view.showUsers(users);
