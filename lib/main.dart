@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/MyHomePage.dart';
-import 'package:flutter_project/homescreen/HomeScreen.dart';
+import 'package:flutter_project/presentation/navigation/NavigationScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,8 +21,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'Flutter App'),
+      home: NavigationScreen(title: 'Flutter App'),
     );
   }
 }
-
