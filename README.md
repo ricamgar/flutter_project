@@ -1,16 +1,11 @@
-# flutter_project
+# Ejemplos Flutter
 
-A new Flutter application.
+Este es un proyecto de ejemplo para practicar los conceptos vistos en clase
 
-## Getting Started
+## Ramas
 
-This project is a starting point for a Flutter application.
+El proyecto tiene diferentes ramas con los diferentes estados:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+* __master__: El estado más reciente de la aplicación
+* __feature/http_networking__: Llamadas a una API pública usando la librería `http`
+* __feature/firebase_networking__: Obtención de datos de Firebase Database usando la librería `cloud_firestore`
