@@ -47,31 +47,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 Navigator.of(context).pop();
               },
             ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Setting'),
-              onTap: () {
-                setState(() {
-                  _currentScreenIndex = 1;
-                });
-                Navigator.pop(context);
-              },
-            ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), title: Text('Settings')),
-        ],
-        currentIndex: _currentScreenIndex,
-        onTap: (index) {
-          setState(() {
-            _currentScreenIndex = index;
-          });
-        },
       ),
       body: _getCurrentScreen(),
     );

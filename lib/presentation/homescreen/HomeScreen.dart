@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/data/TriviaRepository.dart';
+import 'package:flutter_project/model/trivia.dart';
+import 'package:flutter_project/presentation/detail/DetailScreen.dart';
 import 'package:flutter_project/presentation/homescreen/HomePresenter.dart';
 import 'package:flutter_project/presentation/homescreen/HomeView.dart';
-import 'package:flutter_project/presentation/settings/SettingsScreen.dart';
-import 'package:flutter_project/model/user.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,12 +12,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> implements HomeView {
   HomePresenter _homePresenter;
-  List<User> _users = [];
+  List<Trivia> _trivia = [];
   bool _isLoading = true;
   bool _isError = false;
 
   _HomeScreenState() {
-    _homePresenter = HomePresenter(this);
+    _homePresenter = HomePresenter(this, TriviaRepository());
   }
 
   @override
@@ -26,9 +27,9 @@ class _HomeScreenState extends State<HomeScreen> implements HomeView {
   }
 
   @override
-  openSettingsScreen(int position) {
+  openDetailScreen(Trivia trivia) {
     Navigator.push(context, MaterialPageRoute(builder: (c) {
-      return SettingsScreen(position);
+      return DetailScreen(trivia);
     }));
   }
 
@@ -54,9 +55,9 @@ class _HomeScreenState extends State<HomeScreen> implements HomeView {
   }
 
   @override
-  showUsers(List<User> users) {
+  showTrivia(List<Trivia> trivia) {
     setState(() {
-      this._users = users;
+      this._trivia = trivia;
     });
   }
 
@@ -67,8 +68,7 @@ class _HomeScreenState extends State<HomeScreen> implements HomeView {
         padding: const EdgeInsets.symmetric(horizontal: 90.0),
         child: CircularProgressIndicator(),
       ));
-    }
-    else if (_isError) {
+    } else if (_isError) {
       return Center(child: Text("Ha habido un error"));
     } else {
       return RefreshIndicator(
@@ -77,17 +77,19 @@ class _HomeScreenState extends State<HomeScreen> implements HomeView {
         },
         child: ListView.builder(
           itemBuilder: (context, position) {
-            return ListTile(
-              leading: Icon(Icons.account_circle),
-              title:
-                  Text(_users[position].name + " " + _users[position].lastName),
-              subtitle: Text(_users[position].mail),
-              onTap: () {
-                _homePresenter.elementClicked(position);
-              },
+            Trivia trivia = _trivia[position];
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: ListTile(
+                leading: Icon(Icons.help),
+                title: Text(trivia.question),
+                onTap: () {
+                  _homePresenter.elementClicked(trivia);
+                },
+              ),
             );
           },
-          itemCount: _users.length,
+          itemCount: _trivia.length,
           reverse: false,
         ),
       );

@@ -1,9 +1,9 @@
-import 'package:flutter_project/model/user.dart';
+import 'package:flutter_project/model/trivia.dart';
 
 abstract class HomeView {
-  openSettingsScreen(int position);
+  openDetailScreen(Trivia trivia);
 
-  showUsers(List<User> users);
+  showTrivia(List<Trivia> trivia);
 
   showLoading();
 
